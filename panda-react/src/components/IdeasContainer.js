@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 class IdeasContainer extends Component {
-	construtor(props){
+	constructor(props) {
 		super(props)
 		this.state = {
 			ideas: []
@@ -14,7 +14,7 @@ class IdeasContainer extends Component {
 			console.log(response)
 			this.setState({ideas: response.data})
 		})
-		.catch(error)
+		.catch(error => console.log(error))
 	}
 	render() {
 		return (
