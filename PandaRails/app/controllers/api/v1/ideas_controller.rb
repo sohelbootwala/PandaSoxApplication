@@ -1,7 +1,7 @@
 module Api::V1
 	class IdeasController < ApplicationController
 	  def index
-	  	@ideas = Idea.all
+	  	@ideas = Idea.order("created_at DESC")
 	  	render json: @ideas
 	  end
 
@@ -11,7 +11,7 @@ module Api::V1
 		end
 
 		private
-		
+
 		def idea_params
 			params.require(:idea).permit(:title, :body)
 		end
