@@ -6,7 +6,15 @@ module Api::V1
 	  end
 
   	def create
+			p "creating new idea"
 			@idea = Idea.create(idea_params)
+			render json: @idea
+		end
+
+		def update
+			p "updating idea???"
+			@idea = Idea.find(params[:id])
+			@idea.update_attributes(idea_params)
 			render json: @idea
 		end
 

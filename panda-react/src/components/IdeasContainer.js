@@ -22,13 +22,21 @@ class IdeasContainer extends Component {
 	}
 
 	addNewIdea = () => {
-		axios.post("http://localhost:3001/api/v1/ideas", {idea: {title: "", body:""}})
+		axios.post('http://localhost:3001/api/v1/ideas', {idea: {title: "", body: ""}})
 		.then(response => {
-			console.log(response)
+			console.log("Im creating a new idea in Axios right now")
 			const ideas = update(this.state.ideas, { $splice: [[0, 0, response.data]]})
 			this.setState({ideas: ideas, editingIdeaId: response.data.id})
 		})
-		.catch(error => console.log(error))
+		.catch(error => {
+			console.log(error)
+		})
+	}
+
+	updateIdea = (idea) => {
+		const ideaIndex = this.state.ideas.findIndex(x => x.id === idea.id)
+		const ideas = update(this.state.ideas, {[ideaIndex]: { $set: idea}})
+		this.setState({ideas: ideas})
 	}
 
 	render() {
