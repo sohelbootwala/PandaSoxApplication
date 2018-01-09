@@ -34,8 +34,15 @@ class IdeasContainer extends Component {
 	}
 
 	updateIdea = (idea) => {
+		console.log("I'm in update right now")
 		const ideaIndex = this.state.ideas.findIndex(x => x.id === idea.id)
 		const ideas = update(this.state.ideas, {[ideaIndex]: { $set: idea}})
+		this.setState({ideas: ideas})
+	}
+
+	updateIdea = (idea) => {
+		const ideaIndex = this.state.ideas.findIndex(x => x.id === idea.id)
+		const ideas = update(this.state.ideas, {[ideaIndex]: { $set: idea }})
 		this.setState({ideas: ideas})
 	}
 
@@ -49,7 +56,7 @@ class IdeasContainer extends Component {
 					</div>
 				{this.state.ideas.map((idea) =>{
 					if(this.state.editingIdeaId === idea.id) {
-						return(<IdeaForm idea={idea} key={idea.id} />)
+						return(<IdeaForm idea={idea} key={idea.id} updateIdea={this.updateIdea} />)
 					} else {
 						return(<Idea idea={idea} key={idea.id} />)
 					}
